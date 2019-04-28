@@ -1,0 +1,10 @@
+match (t:Tweet)
+WITH extract( m in 
+                filter(m in split(t.tweetContent," ") where m starts with "@" and size(m) > 1) 
+                | right(m,size(m)-1))
+                AS mentions, t.userName AS tmpUsername
+CREATE (a:Tweeters { 
+tweeterName: tmpUsername,
+mentions: mentions
+})
+return a;

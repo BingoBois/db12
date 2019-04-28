@@ -1,0 +1,14 @@
+LOAD CSV WITH HEADERS FROM "file:///some2016UKgeotweets.csv" AS row 
+    FIELDTERMINATOR ";"
+
+
+CREATE (a:Tweet { 
+  userName: row.`User Name`,
+  place: row.`Place (as appears on Bio)`,
+  latitude: row.`Latitude`,
+  longitude: row.`Longitude`,
+  tweetContent: row.`Tweet content`,
+  nickName: row.`Nickname`
+  })
+  return a
+  LIMIT 1000;

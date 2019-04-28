@@ -1,0 +1,20 @@
+docker run -d --name neo4j --rm --publish=7474:7474 --publish=7687:7687 --env NEO4J_AUTH="neo4j/mingade" neo4j
+
+
+
+CREATE (a:Person { name: "Viktor", from: "Denmark", kat: "Mille"});
+
+MATCH (a:Person) WHERE a.name = "Viktor" return a;
+
+MATCH (a) return a;
+
+MATCH (a), (b)
+where a.name = "Viktor" AND b.name = "William"
+CREATE (b)-[:KNOWS {since: 1995}]->(a);
+
+
+
+MATCH (a:Person)-[r:KNOWS]-(friends)
+WHERE a.name = "Viktor" 
+RETURN a, r, friends
+limit 2;

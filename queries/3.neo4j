@@ -1,0 +1,5 @@
+MATCH (a:Tweeters)
+UNWIND a.mentions as m
+MATCH (b:Tweeters)
+WHERE b.tweeterName = m
+CREATE (a)-[:Tweeted]->(b);
